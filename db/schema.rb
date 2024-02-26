@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_061625) do
-  create_table "locations", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_082126) do
+  create_table "location", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "zip_code"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "address"
+    t.string "locatable_type", null: false
+    t.integer "locatable_id", null: false
+    t.index ["locatable_type", "locatable_id"], name: "index_location_on_locatable"
   end
 
   create_table "profiles", force: :cascade do |t|

@@ -5,7 +5,7 @@ class User < ApplicationRecord
   format: { with: URI::MailTo::EMAIL_REGEXP }
 
   has_one :profile, dependent: :destroy
-  has_one :location, as: :locationable, dependent: :destroy
+  has_one :location, as: :locatable, dependent: :destroy
   
   private
   def validate_username
