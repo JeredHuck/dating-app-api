@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
   has_one :location, as: :locatable, dependent: :destroy
+
+  after_create :create_profile
   
   private
   def validate_username
