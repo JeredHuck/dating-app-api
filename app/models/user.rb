@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 30 }
-
-  validates :email, presence: true, uniqueness: true, length: { minimum: 3, maximum: 30 }, 
-  format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, uniqueness: true, length: { minimum: 3, maximum: 50 }, 
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
 
   has_one :profile, dependent: :destroy
   has_one :location, as: :locatable, dependent: :destroy
