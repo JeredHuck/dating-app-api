@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = @current_user.new(user_params)
+    user = User.new(user_params)
 
     if user.save
       render json: UserBlueprint.render(user, view: :normal), status: :created

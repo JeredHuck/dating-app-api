@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 30 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maximum: 30 },
+                       format: { with: /\A[a-zA-Z0-9_]+\Z/, message: "Can only contain letters, numbers, and underscores, and must contain at least one letter or number."}
   validates :email, presence: true, uniqueness: true, length: { minimum: 3, maximum: 50 }, 
                     format: { with: URI::MailTo::EMAIL_REGEXP }
 
@@ -7,11 +8,7 @@ class User < ApplicationRecord
   has_one :location, as: :locatable, dependent: :destroy
 
   after_create :create_profile
+
+  has_secure_password
   
-  private
-  def validate_username
-    unless username =~ /\A[a-zA-Z0-9_]+\Z/
-      errors.add(:username, "Can only contain letters, numbers, and underscores, and must contain at least one letter or number.")
-    end
-  end
 end
